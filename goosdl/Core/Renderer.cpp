@@ -86,7 +86,6 @@ void Renderer::setTargetTexture(HardwareTexture * texture)
 // set the colour
 void Renderer::setColour(const Color & color)
 {
-    std::cout << "Set color: " << color << '\n';
     m_drawingColor = color;
     SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
 }
@@ -145,9 +144,11 @@ void Renderer::render(Layer *layer)
         fill();
     }
     
+    // target texture
+    SDL_Texture * texture = reinterpret_cast<SDL_Texture *>(layer->getTexture());
+    
     // layer transparency
     // ideally update when opacity *has* changed.
-    SDL_Texture * texture = reinterpret_cast<SDL_Texture *>(layer->getTexture());
     if (layer->getOpacity() == SDL_ALPHA_OPAQUE) {
         SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE);
     } else {
@@ -157,10 +158,7 @@ void Renderer::render(Layer *layer)
     
     // copy the texture to the target
     auto rect = reinterpret_cast<const SDL_Rect &>(layer->getFrame());
-    SDL_RenderCopy(m_renderer,
-                   reinterpret_cast<SDL_Texture *>(layer->getTexture()),
-                   nullptr,
-                   &rect);
+    SDL_RenderCopy(m_renderer, texture, nullptr, &rect);
     
     // update the screen
     if (current == nullptr) {
