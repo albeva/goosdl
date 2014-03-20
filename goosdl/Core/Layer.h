@@ -9,10 +9,13 @@
 #include "Object.h"
 #include "Geometry.h"
 #include "Color.h"
-#include "Renderer.h"
 #include <vector>
 
 namespace goo {
+
+    
+class Renderer;
+class Surface;
 
 
 /**
@@ -43,14 +46,14 @@ public:
     // insert layer below the target layer
     void insertLayerBelow(Layer * layer, Layer * target);
     
+    // child layers
+    const std::vector<Layer *> & getLayers() const { return m_layers; }
+    
     // the parent layer
     Layer * getParent() const { return m_parent; }
     
     // get layer surface. Surface is owned by the layer
-    Renderer::HardwareTexture * getTexture() const { return m_texture; }
-    
-    // child layers
-    const std::vector<Layer *> & getLayers() const { return m_layers; }
+    Surface * getSurface() const { return m_surface; }
     
     // layer frame
     const Rect & getFrame() const { return m_frame; }
@@ -89,7 +92,7 @@ private:
     std::vector<Layer *> m_layers;
     
     Renderer * m_renderer;
-    Renderer::HardwareTexture * m_texture;
+    Surface * m_surface;
 };
 
 } // ~namespace goo

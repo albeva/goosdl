@@ -18,18 +18,14 @@ struct SDL_Window;
 namespace goo {
 
 class Layer;
-
+class Surface;
+    
 /**
  * render the layers
  */
 class Renderer : public Object
 {
 public:
-    
-    // strongly typed anonynous type for the underlying
-    // graphics texture
-    struct HardwareTexture{};
-    
     
     // get default renderer. A renderer *must* be instantiated first
     // simply returns currently the first renderer
@@ -44,12 +40,6 @@ public:
     // render
     void render(Layer * root);
     
-    // create platform specific texture
-    HardwareTexture * createTexture(Size size);
-    
-    // destroy platform texture
-    void destroyTexture(HardwareTexture * texture);
-    
     // set the colour
     void setColour(const Color & color);
     
@@ -62,10 +52,13 @@ public:
     // pop the state
     void popState();
     
+    // get native renderer
+    SDL_Renderer * getNativeRenderer() const { return m_renderer; }
+    
 private:
     
     // set the target rendering surface
-    void setTargetTexture(HardwareTexture * texture);
+    void setTargetSurface(Surface * texture);
     
     // drawing context state
     struct State {
@@ -78,7 +71,7 @@ private:
     // data
     SDL_Window * m_window;
     SDL_Renderer * m_renderer;
-    HardwareTexture * m_targetTexture;
+    Surface * m_targetSurface;
 };
 
 } // ~namespace goo

@@ -7,6 +7,7 @@
 //
 #include "Renderer.h"
 #include "Layer.h"
+#include "Surface.h"
 #include <SDL2/SDL.h>
 
 using namespace goo;
@@ -32,7 +33,7 @@ Renderer * Renderer::getDefaultRenderer()
 Renderer::Renderer(SDL_Window * wnd)
 : m_window(wnd),
   m_drawingColor(Color::White),
-  m_targetTexture(nullptr)
+  m_targetSurface(nullptr)
 {
     m_renderer = SDL_CreateRenderer(wnd, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_PRESENTVSYNC);
     if (m_renderer == nullptr) {
@@ -53,34 +54,11 @@ Renderer::~Renderer()
 }
 
 
-// create platform specific texture
-Renderer::HardwareTexture * Renderer::createTexture(Size size)
-{
-    auto texture = SDL_CreateTexture(m_renderer,
-                                     SDL_PIXELFORMAT_RGBA8888,
-                                     SDL_TEXTUREACCESS_TARGET,
-                                     size.width,
-                                     size.height);
-
-    if (texture == nullptr) {
-        std::cout << "Failed to create SDL_Texture. Error: " << SDL_GetError() << '\n';
-    }
-    return reinterpret_cast<HardwareTexture*>(texture);
-}
-
-
-// destroy platform texture
-void Renderer::destroyTexture(HardwareTexture * texture)
-{
-    SDL_DestroyTexture(reinterpret_cast<SDL_Texture *>(texture));
-}
-
-
 // set the rendering target
-void Renderer::setTargetTexture(HardwareTexture * texture)
+void Renderer::setTargetSurface(Surface * surface)
 {
-    m_targetTexture = texture;
-    SDL_SetRenderTarget(m_renderer, reinterpret_cast<SDL_Texture *>(texture));
+    m_targetSurface = surface;
+    SDL_SetRenderTarget(m_renderer, surface ? surface->getTexture() : nullptr);
 }
 
 
@@ -122,18 +100,18 @@ void Renderer::popState()
  */
 void Renderer::render(Layer *layer)
 {
-    HardwareTexture * current = m_targetTexture;
+    Surface * current = m_targetSurface;
     
     // need to render the content?
     if (layer->getNeedRender()) {
         pushState();
-        setTargetTexture(layer->getTexture());
+        setTargetSurface(layer->getSurface());
         layer->render();
         for (Layer * child : layer->getLayers()) {
             child->setNeedUpdate(true);
             render(child);
         }
-        setTargetTexture(current);
+        setTargetSurface(current);
         popState();
     }
     // nothing to update? return.
@@ -143,10 +121,18 @@ void Renderer::render(Layer *layer)
     // clear the main screen
     if (current == nullptr) {
         fill();
+        
+//        // draw loads of dots
+//        for (int i = 0; i < 100000; i++) {
+//            SDL_SetRenderDrawColor(m_renderer, ((unsigned char)(rand() % 255)), ((unsigned char)(rand() % 255)), ((unsigned char)(rand() % 255)), 255);
+//            SDL_RenderDrawPoint(m_renderer, rand() % 640, rand() % 480);
+//        }
+//        
+//        setColour(m_drawingColor);
     }
     
     // target texture
-    SDL_Texture * texture = reinterpret_cast<SDL_Texture *>(layer->getTexture());
+    SDL_Texture * texture = layer->getSurface()->getTexture();
     
     // layer transparency
     // ideally update when opacity *has* changed.

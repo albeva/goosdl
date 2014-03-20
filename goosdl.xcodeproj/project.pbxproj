@@ -15,6 +15,7 @@
 		500A93ED18DA142E00A7F33E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500A93E618DA142E00A7F33E /* main.cpp */; };
 		500AC36818D72B050008384D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500AC36718D72B050008384D /* Cocoa.framework */; };
 		507C598618D72F4D005EF9AD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C598518D72F4D005EF9AD /* SDL2.framework */; };
+		50D6CCF618DB2E58001C3A7A /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D6CCF418DB2E58001C3A7A /* Surface.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		500AC36418D72B050008384D /* goosdl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = goosdl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		500AC36718D72B050008384D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		507C598518D72F4D005EF9AD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		50D6CCF418DB2E58001C3A7A /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
+		50D6CCF518DB2E58001C3A7A /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,8 @@
 				500A93E018DA142E00A7F33E /* Object.cpp */,
 				500A93E318DA142E00A7F33E /* Renderer.h */,
 				500A93E218DA142E00A7F33E /* Renderer.cpp */,
+				50D6CCF518DB2E58001C3A7A /* Surface.h */,
+				50D6CCF418DB2E58001C3A7A /* Surface.cpp */,
 			);
 			name = Core;
 			path = goosdl/Core;
@@ -179,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				500A93E918DA142E00A7F33E /* Layer.cpp in Sources */,
+				50D6CCF618DB2E58001C3A7A /* Surface.cpp in Sources */,
 				500A93EB18DA142E00A7F33E /* Renderer.cpp in Sources */,
 				500A93ED18DA142E00A7F33E /* main.cpp in Sources */,
 				500A93E718DA142E00A7F33E /* Color.cpp in Sources */,

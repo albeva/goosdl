@@ -17,7 +17,7 @@ using namespace goo;
 int main(int argc, char *argv[])
 {    
     // the window
-    SDL_Window * win = SDL_CreateWindow("goosdl", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 320, 240, 0);
+    SDL_Window * win = SDL_CreateWindow("goosdl", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
     
     // the renderer
     auto renderer = new Renderer(win);

@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Albert Varaksin. All rights reserved.
 //
 #include "Layer.h"
+#include "Renderer.h"
+#include "Surface.h"
 #include <algorithm>
 using namespace goo;
 
@@ -17,7 +19,7 @@ Layer::Layer(Rect frame)
 : m_parent(nullptr), m_frame(frame), m_backgroundColor(Color::Black)
 {
     m_renderer = Renderer::getDefaultRenderer();
-    m_texture = m_renderer->createTexture(frame.size);
+    m_surface = new Surface(m_renderer, frame.size);
     m_alpha = 255;
     m_needRender = true;
 }
@@ -34,8 +36,8 @@ Layer::~Layer()
     }
     
     // remove surface
-    if (m_texture) {
-        m_renderer->destroyTexture(m_texture);
+    if (m_surface) {
+        delete m_surface;
     }
     
     // remove all child layers
