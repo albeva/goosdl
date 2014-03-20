@@ -98,7 +98,6 @@ void Layer::render()
 void Layer::addLayer(Layer *layer)
 {
     if (layer->m_parent != nullptr) {
-        if (layer->m_parent == this) return;
         layer->m_parent->removeLayer(layer);
     }
     m_layers.push_back(layer);
