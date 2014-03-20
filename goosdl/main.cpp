@@ -12,6 +12,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
+using namespace goo;
+
 int main(int argc, char *argv[])
 {    
     // the window

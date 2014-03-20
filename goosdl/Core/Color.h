@@ -9,6 +9,7 @@
 #include <iostream>
 #include "ColorTable.def.h"
 
+namespace goo {
 
 /**
  * Represent a colour
@@ -43,3 +44,5 @@ struct Color
     std::string toString() const;
 };
 std::ostream& operator<<(std::ostream& os, const Color & color);
+
+} // ~namespace goo

@@ -7,6 +7,7 @@
 //
 #include "Color.h"
 #include <unordered_map>
+using namespace goo;
 
 
 // initialize the colours

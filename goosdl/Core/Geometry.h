@@ -7,6 +7,8 @@
 //
 #pragma once
 
+namespace goo {
+
 
 /**
  * represent a coordinate on screen
@@ -111,3 +113,6 @@ struct Rect
         position.y += ydiff;
     }
 };
+
+
+} // ~namespace goo

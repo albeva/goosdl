@@ -8,6 +8,8 @@
 #pragma once
 #include <cstddef>
 
+namespace goo {
+
 /**
  * Object
  *
@@ -33,3 +35,5 @@ public:
     // get current object ID
     size_t getId() const { return m_ID; }
 };
+    
+} // ~namespace goo

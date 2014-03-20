@@ -10,9 +10,9 @@
 #include "Geometry.h"
 #include "Color.h"
 #include "Renderer.h"
-
 #include <vector>
 
+namespace goo {
 
 
 /**
@@ -91,3 +91,5 @@ private:
     Renderer * m_renderer;
     Renderer::HardwareTexture * m_texture;
 };
+
+} // ~namespace goo

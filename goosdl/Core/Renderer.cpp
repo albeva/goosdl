@@ -9,6 +9,7 @@
 #include "Layer.h"
 #include <SDL2/SDL.h>
 
+using namespace goo;
 
 /**
  * the default renderer

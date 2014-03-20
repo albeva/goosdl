@@ -12,11 +12,12 @@
 #include "Geometry.h"
 #include <stack>
 
-
-class Layer;
 struct SDL_Renderer;
 struct SDL_Window;
 
+namespace goo {
+
+class Layer;
 
 /**
  * render the layers
@@ -79,3 +80,5 @@ private:
     SDL_Renderer * m_renderer;
     HardwareTexture * m_targetTexture;
 };
+
+} // ~namespace goo

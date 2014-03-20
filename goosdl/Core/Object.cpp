@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Albert Varaksin. All rights reserved.
 //
 #include "Object.h"
-
+using namespace goo;
 
 /**
  * Generate new object ID

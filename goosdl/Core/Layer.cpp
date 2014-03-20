@@ -7,6 +7,7 @@
 //
 #include "Layer.h"
 #include <algorithm>
+using namespace goo;
 
 
 /**
