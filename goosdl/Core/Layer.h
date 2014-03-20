@@ -12,7 +12,6 @@
 #include "Renderer.h"
 
 #include <vector>
-#include <algorithm>
 
 
 

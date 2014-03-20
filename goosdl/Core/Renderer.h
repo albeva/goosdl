@@ -8,13 +8,15 @@
 #pragma once
 
 #include "Object.h"
-#include <SDL2/SDL.h>
-#include <stack>
 #include "Color.h"
 #include "Geometry.h"
+#include <stack>
+
 
 class Layer;
-class Surface;
+struct SDL_Renderer;
+struct SDL_Window;
+
 
 /**
  * render the layers

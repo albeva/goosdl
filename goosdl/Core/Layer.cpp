@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Albert Varaksin. All rights reserved.
 //
 #include "Layer.h"
+#include <algorithm>
 
 
 /**

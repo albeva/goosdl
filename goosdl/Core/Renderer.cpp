@@ -7,6 +7,7 @@
 //
 #include "Renderer.h"
 #include "Layer.h"
+#include <SDL2/SDL.h>
 
 
 /**
