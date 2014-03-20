@@ -16,17 +16,17 @@ namespace goo {
  */
 struct Color
 {
-    union {
-        struct { unsigned char r, g, b, a; };
-        unsigned int color_tag;
-    };
+    unsigned char r, g, b, a;
+    
+    // hack to get unsigned int value from the color
+    inline unsigned int color_tag() const { return *reinterpret_cast<unsigned int*>(const_cast<Color *>(this)); }
     
     // compare two colors for (in)equality
     inline bool operator == (const Color & rhs) const {
-        return color_tag == rhs.color_tag;
+        return color_tag() == rhs.color_tag();
     }
     inline bool operator != (const Color & rhs) const {
-        return color_tag != rhs.color_tag;
+        return color_tag() != rhs.color_tag();
     }
     
     /**

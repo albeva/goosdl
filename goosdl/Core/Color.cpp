@@ -19,7 +19,7 @@ COLOR_TABLE(IMPLEMENT_COLOR)
 // color value to string map
 static std::unordered_map<unsigned int, std::string> _colorNames = {
 #define COLOR_TO_STRING(_name, r, g, b) \
-    {Color::_name.color_tag, #_name},
+    {Color::_name.color_tag(), #_name},
 COLOR_TABLE(COLOR_TO_STRING)
 #undef COLOR_TO_STRING
 };
@@ -50,7 +50,7 @@ const Color & Color::findByName(std::string name)
 std::string Color::toString() const
 {
     std::string s = "Color{";
-    auto iter = _colorNames.find(color_tag);
+    auto iter = _colorNames.find(color_tag());
     if (iter == _colorNames.end()) {
         s += "r: " + std::to_string(r) + ", ";
         s += "g: " + std::to_string(g) + ", ";

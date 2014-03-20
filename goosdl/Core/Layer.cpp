@@ -132,7 +132,7 @@ void Layer::insertLayer(Layer * layer, size_t position)
     if (position >= m_layers.size()) {
         m_layers.push_back(layer);
     } else {
-        m_layers.insert(m_layers.begin() + position, layer);
+        m_layers.insert(m_layers.begin() + (std::vector<Layer *>::difference_type)position, layer);
     }
     
     layer->m_parent = nullptr;
@@ -144,7 +144,7 @@ void Layer::insertLayerAbove(Layer * layer, Layer * target)
 {
     auto iter = std::find(m_layers.begin(), m_layers.end(), target);
     if (iter != m_layers.end()) {
-        insertLayer(layer, iter - m_layers.begin() + 1);
+        insertLayer(layer, (size_t)(iter - m_layers.begin() + 1));
     } else {
         // TODO error
     }
@@ -156,7 +156,7 @@ void Layer::insertLayerBelow(Layer * layer, Layer * target)
 {
     auto iter = std::find(m_layers.begin(), m_layers.end(), target);
     if (iter != m_layers.end()) {
-        insertLayer(layer, iter - m_layers.begin());
+        insertLayer(layer, (size_t)(iter - m_layers.begin()));
     } else {
         // TODO error
     }
