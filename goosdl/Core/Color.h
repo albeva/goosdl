@@ -22,16 +22,10 @@ struct Color
     
     // compare two colors for (in)equality
     inline bool operator == (const Color & rhs) const {
-        return r == rhs.r
-            && g == rhs.g
-            && b == rhs.b
-            && a == rhs.a;
+        return color_tag == rhs.color_tag;
     }
     inline bool operator != (const Color & rhs) const {
-        return r != rhs.r
-            || g != rhs.g
-            || b != rhs.b
-            || a != rhs.a;
+        return color_tag != rhs.color_tag;
     }
     
     /**
