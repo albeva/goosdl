@@ -23,17 +23,26 @@ class Surface : public Object
 {
 public:
     
+    // create surface
     Surface(Renderer * renderer, Size size);
     
+    // clean up
     virtual ~Surface();
     
+    // get underlying SDL_Texture object
     SDL_Texture * getTexture() const { return m_texture; }
     
+    // get texture size. Actual unerlying texture *can* be bigger!
     Size getSize() const { return m_size; }
+    
+    // apply new size. This might reallocate the texture and invalidate
+    // the content
+    void setSize(const Size & size);
     
 private:
     Size m_size;
     SDL_Texture * m_texture;
+    Renderer * m_renderer;
 };
     
     

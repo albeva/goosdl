@@ -49,6 +49,9 @@ public:
     // child layers
     const std::vector<Layer *> & getLayers() const { return m_layers; }
     
+    // find layer at given coordinates. Coordinate is relative the current layer
+    Layer * findLayer(const Point & pint) const;
+    
     // the parent layer
     Layer * getParent() const { return m_parent; }
     

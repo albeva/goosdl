@@ -121,14 +121,6 @@ void Renderer::render(Layer *layer)
     // clear the main screen
     if (current == nullptr) {
         fill();
-        
-//        // draw loads of dots
-//        for (int i = 0; i < 100000; i++) {
-//            SDL_SetRenderDrawColor(m_renderer, ((unsigned char)(rand() % 255)), ((unsigned char)(rand() % 255)), ((unsigned char)(rand() % 255)), 255);
-//            SDL_RenderDrawPoint(m_renderer, rand() % 640, rand() % 480);
-//        }
-//        
-//        setColour(m_drawingColor);
     }
     
     // target texture
@@ -144,8 +136,9 @@ void Renderer::render(Layer *layer)
     SDL_SetTextureAlphaMod(texture, layer->getOpacity());
     
     // copy the texture to the target
-    auto rect = reinterpret_cast<const SDL_Rect &>(layer->getFrame());
-    SDL_RenderCopy(m_renderer, texture, nullptr, &rect);
+    auto dstRect = reinterpret_cast<const SDL_Rect &>(layer->getFrame());
+    SDL_Rect srcRect{0, 0, dstRect.w, dstRect.h};
+    SDL_RenderCopy(m_renderer, texture, &srcRect, &dstRect);
     
     // update the screen
     if (current == nullptr) {

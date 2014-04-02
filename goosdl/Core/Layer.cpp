@@ -48,7 +48,7 @@ Layer::~Layer()
 }
 
 
-#pragma - Layer attributes
+#pragma mark - Layer attributes
 
 /**
  * set layer frame
@@ -56,6 +56,10 @@ Layer::~Layer()
 void Layer::setFrame(const Rect & rect)
 {
     m_needRender = rect.size != m_frame.size;
+    if (m_needRender) {
+        m_surface->setSize(rect.size);
+    }
+    
     m_frame = rect;
     m_needUpdate = true;
 }
@@ -77,7 +81,7 @@ void Layer::setOpacity(unsigned char alpha)
 }
 
 
-#pragma - Layer rendering
+#pragma mark - Layer rendering
 
 
 // render this layer
@@ -92,7 +96,25 @@ void Layer::render()
 }
 
 
-#pragma - Manage Child layers
+#pragma mark - Query child layers
+
+
+// find layer at given coordinates. Coordinate is relative the parent layer
+Layer * Layer::findLayer(const Point & point) const
+{
+    if (m_frame.contains(point) == false) return nullptr;
+    
+    // iterate in reverse order.
+    for (auto iter = m_layers.rbegin(); iter != m_layers.rend(); iter++) {
+        auto child = (*iter)->findLayer(point - m_frame.position);
+        if (child != nullptr) return child;
+    }
+    
+    return const_cast<Layer*>(this);
+}
+
+
+#pragma mark - Manage Child layers
 
 
 /**

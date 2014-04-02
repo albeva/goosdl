@@ -9,6 +9,10 @@
 
 namespace goo {
 
+    
+struct Size;
+struct Rect;
+
 
 /**
  * represent a coordinate on screen
@@ -24,6 +28,24 @@ struct Point
     }
     inline bool operator != (const Point & rhs) const {
         return x != rhs.x || y != rhs.y;
+    }
+    
+    // subtract point from another
+    inline Point operator - (const Point & rhs) const {
+        return {x - rhs.x, y - rhs.y};
+    }
+    
+    // add points together
+    inline Point operator +(const Point & rhs) const {
+        return {x + rhs.x, y + rhs.y};
+    }
+    
+    // offset location by relative amount
+    inline Point & offset(int xdiff, int ydiff)
+    {
+        x += xdiff;
+        y += ydiff;
+        return *this;
     }
 };
 
@@ -43,7 +65,26 @@ struct Size
     inline bool operator != (const Size & rhs) const {
         return width != rhs.width || height != rhs.height;
     }
+    
+    // test if width and/or height is smaller than rhs
+    inline bool operator < (const Size & rhs) const {
+        return width < rhs.width || height < rhs.height;
+    }
 };
+    
+
+// create new point offset by size
+inline Point operator + (const Point & lhs, const Size & rhs)
+{
+    return {lhs.x + rhs.width, lhs.y + rhs.height };
+}
+    
+    
+// create new point offset by size
+inline Point operator - (const Point & lhs, const Size & rhs)
+{
+    return {lhs.x - rhs.width, lhs.y - rhs.height };
+}
 
 
 /**
@@ -109,8 +150,15 @@ struct Rect
     // offset location by relative amount
     inline void offset(int xdiff, int ydiff)
     {
-        position.x += xdiff;
-        position.y += ydiff;
+        position.offset(xdiff, ydiff);
+    }
+    
+    // add size
+    inline Rect & operator += (const Size & rhs)
+    {
+        size.width += rhs.width;
+        size.height += rhs.height;
+        return *this;
     }
 };
 
