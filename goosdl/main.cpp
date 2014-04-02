@@ -34,6 +34,46 @@ int main(int argc, char *argv[])
     resizeGrip->setBackground(Color::LightBlue);
     box->addLayer(resizeGrip);
     
+    /*
+     
+     resizeGrip->addConstraint(Constraint{
+        resizeGrip,
+        Constraint::Width,
+        Constraint::Equal,
+        nullptr,
+        Constraint::None,
+        10
+     });
+     
+     resizeGrip->addConstraint(Constraint{
+         resizeGrip,
+         Constraint::Height,
+         Constraint::Equal,
+         nullptr,
+         Constraint::None,
+         10
+     });
+     
+     box->addConstraint(Constraint{
+        resizeGrip,
+        Constraint::Left,
+        Constraint::Equal,
+        box,
+        Constraint::Width,
+        -10
+     });
+     
+     box->addConstraint(Constraint{
+        resizeGrip,
+        Constraint::Bottom,
+        Constraint::Equal,
+        box,
+        Constraint::Height,
+        -10
+     });
+     
+     */
+    
     // do until quit
     bool dragging = false;
     bool resizing = false;
