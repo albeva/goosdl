@@ -9,6 +9,7 @@
 #include "Core/Layer.h"
 #include "Core/Color.h"
 #include "Core/Renderer.h"
+#include "Core/Constraint.h"
 #include <iostream>
 #include <SDL2/SDL.h>
 
@@ -34,45 +35,38 @@ int main(int argc, char *argv[])
     resizeGrip->setBackground(Color::LightBlue);
     box->addLayer(resizeGrip);
     
-    /*
-     
-     resizeGrip->addConstraint(Constraint{
+    resizeGrip->addConstraint(Constraint{
         resizeGrip,
         Constraint::Width,
         Constraint::Equal,
         nullptr,
         Constraint::None,
         10
-     });
-     
-     resizeGrip->addConstraint(Constraint{
-         resizeGrip,
-         Constraint::Height,
-         Constraint::Equal,
-         nullptr,
-         Constraint::None,
-         10
-     });
-     
-     box->addConstraint(Constraint{
+    });
+    resizeGrip->addConstraint(Constraint{
+        resizeGrip,
+        Constraint::Height,
+        Constraint::Equal,
+        nullptr,
+        Constraint::None,
+        10
+    });
+    box->addConstraint(Constraint{
         resizeGrip,
         Constraint::Left,
         Constraint::Equal,
         box,
         Constraint::Width,
         -10
-     });
-     
-     box->addConstraint(Constraint{
+    });
+    box->addConstraint(Constraint{
         resizeGrip,
         Constraint::Bottom,
         Constraint::Equal,
         box,
         Constraint::Height,
         -10
-     });
-     
-     */
+    });
     
     // do until quit
     bool dragging = false;
@@ -92,10 +86,7 @@ int main(int argc, char *argv[])
                     frame += Size{e.motion.xrel, e.motion.yrel};
                     if (frame.size.width >= 20 && frame.size.height >= 20) {
                         box->setFrame(frame);
-                        
-                        Rect resizeRect = resizeGrip->getFrame();
-                        resizeRect.position = Point{frame.w(), frame.h()} - resizeRect.size;
-                        resizeGrip->setFrame(resizeRect);
+                        box->updateConstraints();
                     }
                 }
             } else if (e.type == SDL_MOUSEBUTTONDOWN) {

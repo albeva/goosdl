@@ -16,6 +16,10 @@
 		500AC36818D72B050008384D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500AC36718D72B050008384D /* Cocoa.framework */; };
 		5018120518EC5514004FDB1F /* Constraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5018120318EC5514004FDB1F /* Constraint.cpp */; };
 		507C598618D72F4D005EF9AD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C598518D72F4D005EF9AD /* SDL2.framework */; };
+		50B1476118EDA67D00329C1A /* linear_expression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B1474F18EDA67D00329C1A /* linear_expression.cpp */; };
+		50B1476218EDA67D00329C1A /* simplex_solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B1475518EDA67D00329C1A /* simplex_solver.cpp */; };
+		50B1476318EDA67D00329C1A /* symbolic_weight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B1475B18EDA67D00329C1A /* symbolic_weight.cpp */; };
+		50B1476418EDA67D00329C1A /* tableau.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B1475D18EDA67D00329C1A /* tableau.cpp */; };
 		50D6CCF618DB2E58001C3A7A /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D6CCF418DB2E58001C3A7A /* Surface.cpp */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +43,37 @@
 		5018120318EC5514004FDB1F /* Constraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Constraint.cpp; sourceTree = "<group>"; };
 		5018120418EC5514004FDB1F /* Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
 		507C598518D72F4D005EF9AD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		50B1474218EDA67D00329C1A /* abstract_constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = abstract_constraint.hpp; sourceTree = "<group>"; };
+		50B1474318EDA67D00329C1A /* abstract_variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = abstract_variable.hpp; sourceTree = "<group>"; };
+		50B1474418EDA67D00329C1A /* approx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = approx.hpp; sourceTree = "<group>"; };
+		50B1474518EDA67D00329C1A /* constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = constraint.hpp; sourceTree = "<group>"; };
+		50B1474618EDA67D00329C1A /* dummy_variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dummy_variable.hpp; sourceTree = "<group>"; };
+		50B1474718EDA67D00329C1A /* edit_constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = edit_constraint.hpp; sourceTree = "<group>"; };
+		50B1474818EDA67D00329C1A /* edit_or_stay_constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = edit_or_stay_constraint.hpp; sourceTree = "<group>"; };
+		50B1474918EDA67D00329C1A /* errors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = errors.hpp; sourceTree = "<group>"; };
+		50B1474A18EDA67D00329C1A /* errors_expl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = errors_expl.hpp; sourceTree = "<group>"; };
+		50B1474B18EDA67D00329C1A /* float_variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = float_variable.hpp; sourceTree = "<group>"; };
+		50B1474C18EDA67D00329C1A /* iostream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = iostream.hpp; sourceTree = "<group>"; };
+		50B1474D18EDA67D00329C1A /* linear_constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = linear_constraint.hpp; sourceTree = "<group>"; };
+		50B1474E18EDA67D00329C1A /* linear_equation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = linear_equation.hpp; sourceTree = "<group>"; };
+		50B1474F18EDA67D00329C1A /* linear_expression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = linear_expression.cpp; sourceTree = "<group>"; };
+		50B1475018EDA67D00329C1A /* linear_expression.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = linear_expression.hpp; sourceTree = "<group>"; };
+		50B1475118EDA67D00329C1A /* linear_inequality.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = linear_inequality.hpp; sourceTree = "<group>"; };
+		50B1475218EDA67D00329C1A /* objective_variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = objective_variable.hpp; sourceTree = "<group>"; };
+		50B1475318EDA67D00329C1A /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = parser.hpp; sourceTree = "<group>"; };
+		50B1475418EDA67D00329C1A /* relation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = relation.hpp; sourceTree = "<group>"; };
+		50B1475518EDA67D00329C1A /* simplex_solver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simplex_solver.cpp; sourceTree = "<group>"; };
+		50B1475618EDA67D00329C1A /* simplex_solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simplex_solver.hpp; sourceTree = "<group>"; };
+		50B1475718EDA67D00329C1A /* slack_variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = slack_variable.hpp; sourceTree = "<group>"; };
+		50B1475818EDA67D00329C1A /* solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = solver.hpp; sourceTree = "<group>"; };
+		50B1475918EDA67D00329C1A /* stay_constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stay_constraint.hpp; sourceTree = "<group>"; };
+		50B1475A18EDA67D00329C1A /* strength.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = strength.hpp; sourceTree = "<group>"; };
+		50B1475B18EDA67D00329C1A /* symbolic_weight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = symbolic_weight.cpp; sourceTree = "<group>"; };
+		50B1475C18EDA67D00329C1A /* symbolic_weight.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = symbolic_weight.hpp; sourceTree = "<group>"; };
+		50B1475D18EDA67D00329C1A /* tableau.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tableau.cpp; sourceTree = "<group>"; };
+		50B1475E18EDA67D00329C1A /* tableau.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tableau.hpp; sourceTree = "<group>"; };
+		50B1475F18EDA67D00329C1A /* variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variable.hpp; sourceTree = "<group>"; };
+		50B1476018EDA67D00329C1A /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
 		50D6CCF418DB2E58001C3A7A /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
 		50D6CCF518DB2E58001C3A7A /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +94,7 @@
 		500A93D918DA142E00A7F33E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				50B1474118EDA67D00329C1A /* rhea */,
 				500A93DB18DA142E00A7F33E /* Color.h */,
 				500A93EF18DA209800A7F33E /* ColorTable.def.h */,
 				500A93DA18DA142E00A7F33E /* Color.cpp */,
@@ -123,6 +159,44 @@
 			);
 			name = goosdl;
 			path = SdlTest;
+			sourceTree = "<group>";
+		};
+		50B1474118EDA67D00329C1A /* rhea */ = {
+			isa = PBXGroup;
+			children = (
+				50B1474218EDA67D00329C1A /* abstract_constraint.hpp */,
+				50B1474318EDA67D00329C1A /* abstract_variable.hpp */,
+				50B1474418EDA67D00329C1A /* approx.hpp */,
+				50B1474518EDA67D00329C1A /* constraint.hpp */,
+				50B1474618EDA67D00329C1A /* dummy_variable.hpp */,
+				50B1474718EDA67D00329C1A /* edit_constraint.hpp */,
+				50B1474818EDA67D00329C1A /* edit_or_stay_constraint.hpp */,
+				50B1474918EDA67D00329C1A /* errors.hpp */,
+				50B1474A18EDA67D00329C1A /* errors_expl.hpp */,
+				50B1474B18EDA67D00329C1A /* float_variable.hpp */,
+				50B1474C18EDA67D00329C1A /* iostream.hpp */,
+				50B1474D18EDA67D00329C1A /* linear_constraint.hpp */,
+				50B1474E18EDA67D00329C1A /* linear_equation.hpp */,
+				50B1474F18EDA67D00329C1A /* linear_expression.cpp */,
+				50B1475018EDA67D00329C1A /* linear_expression.hpp */,
+				50B1475118EDA67D00329C1A /* linear_inequality.hpp */,
+				50B1475218EDA67D00329C1A /* objective_variable.hpp */,
+				50B1475318EDA67D00329C1A /* parser.hpp */,
+				50B1475418EDA67D00329C1A /* relation.hpp */,
+				50B1475518EDA67D00329C1A /* simplex_solver.cpp */,
+				50B1475618EDA67D00329C1A /* simplex_solver.hpp */,
+				50B1475718EDA67D00329C1A /* slack_variable.hpp */,
+				50B1475818EDA67D00329C1A /* solver.hpp */,
+				50B1475918EDA67D00329C1A /* stay_constraint.hpp */,
+				50B1475A18EDA67D00329C1A /* strength.hpp */,
+				50B1475B18EDA67D00329C1A /* symbolic_weight.cpp */,
+				50B1475C18EDA67D00329C1A /* symbolic_weight.hpp */,
+				50B1475D18EDA67D00329C1A /* tableau.cpp */,
+				50B1475E18EDA67D00329C1A /* tableau.hpp */,
+				50B1475F18EDA67D00329C1A /* variable.hpp */,
+				50B1476018EDA67D00329C1A /* version.hpp */,
+			);
+			path = rhea;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,10 +264,14 @@
 			files = (
 				500A93E918DA142E00A7F33E /* Layer.cpp in Sources */,
 				50D6CCF618DB2E58001C3A7A /* Surface.cpp in Sources */,
+				50B1476118EDA67D00329C1A /* linear_expression.cpp in Sources */,
+				50B1476218EDA67D00329C1A /* simplex_solver.cpp in Sources */,
 				500A93EB18DA142E00A7F33E /* Renderer.cpp in Sources */,
 				500A93ED18DA142E00A7F33E /* main.cpp in Sources */,
+				50B1476418EDA67D00329C1A /* tableau.cpp in Sources */,
 				5018120518EC5514004FDB1F /* Constraint.cpp in Sources */,
 				500A93E718DA142E00A7F33E /* Color.cpp in Sources */,
+				50B1476318EDA67D00329C1A /* symbolic_weight.cpp in Sources */,
 				500A93EA18DA142E00A7F33E /* Object.cpp in Sources */,
 				500A93E818DA142E00A7F33E /* Geometry.cpp in Sources */,
 			);
@@ -295,6 +373,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = goosdl/goosdl.plist;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -325,6 +404,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = goosdl/goosdl.plist;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

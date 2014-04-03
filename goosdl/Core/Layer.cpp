@@ -48,7 +48,7 @@ Layer::~Layer()
 }
 
 
-#pragma mark - Layer attributes
+#pragma mark - Layer Layout
 
 /**
  * set layer frame
@@ -63,6 +63,31 @@ void Layer::setFrame(const Rect & rect)
     m_frame = rect;
     m_needUpdate = true;
 }
+
+
+// add constraint
+void Layer::addConstraint(const Constraint & constraint)
+{
+    m_constraints.push_back(constraint);
+}
+
+
+// update constraints
+void Layer::updateConstraints()
+{
+    // process constraints
+    for (Constraint & constraint : m_constraints) {
+
+    }
+    
+    // update child layers
+    for (Layer * layer : m_layers) {
+        layer->updateConstraints();
+    }
+}
+
+
+#pragma mark - Layer attributes
 
 
 // set the background

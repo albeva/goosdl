@@ -9,6 +9,7 @@
 #include "Object.h"
 #include "Geometry.h"
 #include "Color.h"
+#include "Constraint.h"
 #include <vector>
 
 namespace goo {
@@ -62,6 +63,15 @@ public:
     const Rect & getFrame() const { return m_frame; }
     void setFrame(const Rect & rect);
     
+    // get inner bounds
+    Rect getBounds() const { return {0, 0, m_frame.size.width, m_frame.size.height}; }
+    
+    // add constraint
+    void addConstraint(const Constraint & constraint);
+    
+    // update constraints
+    void updateConstraints();
+    
     // set the background
     void setBackground(const Color & color);
     const Color & getBackgroundColor() const { return m_backgroundColor; }
@@ -93,6 +103,8 @@ private:
     Layer * m_parent;
     Rect m_frame;
     std::vector<Layer *> m_layers;
+    
+    std::vector<Constraint> m_constraints;
     
     Renderer * m_renderer;
     Surface * m_surface;

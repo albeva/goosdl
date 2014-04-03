@@ -5,6 +5,8 @@
 //  Created by Albert Varaksin on 02/04/2014.
 //  Copyright (c) 2014 Albert Varaksin. All rights reserved.
 //
+#pragma once
+
 #include "Geometry.h"
 
 namespace goo {
@@ -17,6 +19,7 @@ namespace goo {
      */
     class Constraint
     {
+    public:
         
         // layout attribute
         enum Attribute {
@@ -24,6 +27,8 @@ namespace goo {
             Bottom,
             Left,
             Right,
+            Width,
+            Height,
             CenterX,
             CenterY,
             None
@@ -36,6 +41,19 @@ namespace goo {
             GreaterOrEqual
         };
         
+        
+        Constraint(Layer * firstView,
+                   Attribute firstAttrib,
+                   Relation relation,
+                   Layer * secondView,
+                   Attribute secondAttrib,
+                   int constant)
+        : m_firstView(firstView),
+          m_firstAttrib(firstAttrib),
+          m_relation(relation),
+          m_secondView(secondView),
+          m_secondAttrib(secondAttrib)
+        {}
        
     private:
         
