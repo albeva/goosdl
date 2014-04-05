@@ -15,6 +15,7 @@
 		500A93ED18DA142E00A7F33E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500A93E618DA142E00A7F33E /* main.cpp */; };
 		500AC36818D72B050008384D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500AC36718D72B050008384D /* Cocoa.framework */; };
 		5018120518EC5514004FDB1F /* Constraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5018120318EC5514004FDB1F /* Constraint.cpp */; };
+		502B460A18F02A2F001B87E6 /* LayoutManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 502B460818F02A2F001B87E6 /* LayoutManager.cpp */; };
 		507C598618D72F4D005EF9AD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C598518D72F4D005EF9AD /* SDL2.framework */; };
 		50B1476118EDA67D00329C1A /* linear_expression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B1474F18EDA67D00329C1A /* linear_expression.cpp */; };
 		50B1476218EDA67D00329C1A /* simplex_solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B1475518EDA67D00329C1A /* simplex_solver.cpp */; };
@@ -42,6 +43,8 @@
 		500AC36718D72B050008384D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5018120318EC5514004FDB1F /* Constraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Constraint.cpp; sourceTree = "<group>"; };
 		5018120418EC5514004FDB1F /* Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
+		502B460818F02A2F001B87E6 /* LayoutManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayoutManager.cpp; sourceTree = "<group>"; };
+		502B460918F02A2F001B87E6 /* LayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutManager.h; sourceTree = "<group>"; };
 		507C598518D72F4D005EF9AD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		50B1474218EDA67D00329C1A /* abstract_constraint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = abstract_constraint.hpp; sourceTree = "<group>"; };
 		50B1474318EDA67D00329C1A /* abstract_variable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = abstract_variable.hpp; sourceTree = "<group>"; };
@@ -94,22 +97,12 @@
 		500A93D918DA142E00A7F33E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				50B1474118EDA67D00329C1A /* rhea */,
-				500A93DB18DA142E00A7F33E /* Color.h */,
-				500A93EF18DA209800A7F33E /* ColorTable.def.h */,
-				500A93DA18DA142E00A7F33E /* Color.cpp */,
-				500A93DD18DA142E00A7F33E /* Geometry.h */,
-				500A93DC18DA142E00A7F33E /* Geometry.cpp */,
 				500A93DF18DA142E00A7F33E /* Layer.h */,
 				500A93DE18DA142E00A7F33E /* Layer.cpp */,
-				500A93E118DA142E00A7F33E /* Object.h */,
-				500A93E018DA142E00A7F33E /* Object.cpp */,
-				500A93E318DA142E00A7F33E /* Renderer.h */,
-				500A93E218DA142E00A7F33E /* Renderer.cpp */,
-				50D6CCF518DB2E58001C3A7A /* Surface.h */,
-				50D6CCF418DB2E58001C3A7A /* Surface.cpp */,
-				5018120418EC5514004FDB1F /* Constraint.h */,
-				5018120318EC5514004FDB1F /* Constraint.cpp */,
+				50B1474118EDA67D00329C1A /* rhea */,
+				502B460C18F02A49001B87E6 /* Utils */,
+				502B460D18F02A5B001B87E6 /* gfx */,
+				502B460B18F02A3F001B87E6 /* Layout */,
 			);
 			name = Core;
 			path = goosdl/Core;
@@ -159,6 +152,42 @@
 			);
 			name = goosdl;
 			path = SdlTest;
+			sourceTree = "<group>";
+		};
+		502B460B18F02A3F001B87E6 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				5018120418EC5514004FDB1F /* Constraint.h */,
+				5018120318EC5514004FDB1F /* Constraint.cpp */,
+				502B460918F02A2F001B87E6 /* LayoutManager.h */,
+				502B460818F02A2F001B87E6 /* LayoutManager.cpp */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
+		502B460C18F02A49001B87E6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				500A93DB18DA142E00A7F33E /* Color.h */,
+				500A93EF18DA209800A7F33E /* ColorTable.def.h */,
+				500A93DA18DA142E00A7F33E /* Color.cpp */,
+				500A93DD18DA142E00A7F33E /* Geometry.h */,
+				500A93DC18DA142E00A7F33E /* Geometry.cpp */,
+				500A93E118DA142E00A7F33E /* Object.h */,
+				500A93E018DA142E00A7F33E /* Object.cpp */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		502B460D18F02A5B001B87E6 /* gfx */ = {
+			isa = PBXGroup;
+			children = (
+				500A93E318DA142E00A7F33E /* Renderer.h */,
+				500A93E218DA142E00A7F33E /* Renderer.cpp */,
+				50D6CCF518DB2E58001C3A7A /* Surface.h */,
+				50D6CCF418DB2E58001C3A7A /* Surface.cpp */,
+			);
+			name = gfx;
 			sourceTree = "<group>";
 		};
 		50B1474118EDA67D00329C1A /* rhea */ = {
@@ -267,6 +296,7 @@
 				50B1476118EDA67D00329C1A /* linear_expression.cpp in Sources */,
 				50B1476218EDA67D00329C1A /* simplex_solver.cpp in Sources */,
 				500A93EB18DA142E00A7F33E /* Renderer.cpp in Sources */,
+				502B460A18F02A2F001B87E6 /* LayoutManager.cpp in Sources */,
 				500A93ED18DA142E00A7F33E /* main.cpp in Sources */,
 				50B1476418EDA67D00329C1A /* tableau.cpp in Sources */,
 				5018120518EC5514004FDB1F /* Constraint.cpp in Sources */,
@@ -373,6 +403,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = goosdl/goosdl.plist;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -404,6 +435,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = goosdl/goosdl.plist;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";

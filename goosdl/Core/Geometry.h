@@ -104,6 +104,12 @@ struct Rect
         return position != rhs.position || size != rhs.size;
     }
     
+    // check if this is empty rect
+    explicit inline operator bool() const
+    {
+        return size.width == 0 && size.height == 0;
+    }
+    
     // shortcut methods to get the position and size
     inline int x1() const { return position.x; }
     inline int x2() const { return position.x + size.width; }

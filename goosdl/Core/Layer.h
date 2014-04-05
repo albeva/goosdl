@@ -9,7 +9,6 @@
 #include "Object.h"
 #include "Geometry.h"
 #include "Color.h"
-#include "Constraint.h"
 #include <vector>
 
 namespace goo {
@@ -17,6 +16,8 @@ namespace goo {
     
 class Renderer;
 class Surface;
+class LayoutManager;
+class Constraint;
 
 
 /**
@@ -25,6 +26,9 @@ class Surface;
 class Layer : public Object
 {
 public:
+    
+    // without surface.
+    Layer();
     
     // create
     Layer(Rect frame);
@@ -57,7 +61,7 @@ public:
     Layer * getParent() const { return m_parent; }
     
     // get layer surface. Surface is owned by the layer
-    Surface * getSurface() const { return m_surface; }
+    Surface * getSurface();
     
     // layer frame
     const Rect & getFrame() const { return m_frame; }
@@ -66,11 +70,18 @@ public:
     // get inner bounds
     Rect getBounds() const { return {0, 0, m_frame.size.width, m_frame.size.height}; }
     
-    // add constraint
-    void addConstraint(const Constraint & constraint);
+    // set layout manager
+    void setLayoutManager(LayoutManager * layout) { m_layout = layout; }
     
-    // update constraints
-    void updateConstraints();
+    // get layout manager recursievly
+    LayoutManager * getLayoutManager() const {
+        if (m_layout) return m_layout;
+        if (m_parent) return m_parent->getLayoutManager();
+        return nullptr;
+    }
+    
+    // add constraint. This layer takes ownership of this constraint
+    void addConstraint(Constraint * constraint);
     
     // set the background
     void setBackground(const Color & color);
@@ -104,10 +115,12 @@ private:
     Rect m_frame;
     std::vector<Layer *> m_layers;
     
-    std::vector<Constraint> m_constraints;
+    std::vector<Constraint *> m_constraints;
     
     Renderer * m_renderer;
     Surface * m_surface;
+    
+    LayoutManager * m_layout;
 };
 
 } // ~namespace goo

@@ -8,6 +8,8 @@
 #include "Layer.h"
 #include "Renderer.h"
 #include "Surface.h"
+#include "Constraint.h"
+#include "LayoutManager.h"
 #include <algorithm>
 using namespace goo;
 
@@ -15,13 +17,25 @@ using namespace goo;
 /**
  * initialize the layer
  */
-Layer::Layer(Rect frame)
-: m_parent(nullptr), m_frame(frame), m_backgroundColor(Color::Black)
+Layer::Layer()
+: m_parent(nullptr),
+  m_backgroundColor(Color::Black),
+  m_layout(nullptr),
+  m_surface(nullptr)
 {
     m_renderer = Renderer::getDefaultRenderer();
-    m_surface = new Surface(m_renderer, frame.size);
     m_alpha = 255;
     m_needRender = true;
+}
+
+
+/**
+ * initialize the layer
+ */
+Layer::Layer(Rect frame)
+: Layer()
+{
+    m_frame = frame;
 }
 
 
@@ -30,22 +44,44 @@ Layer::Layer(Rect frame)
  */
 Layer::~Layer()
 {
-    // remove this from the parent
-    if (m_parent) {
-        m_parent->removeLayer(this);
-    }
-    
     // remove surface
     if (m_surface) {
         delete m_surface;
     }
     
+    // remove any possible constraints
+    auto layout = getLayoutManager();
+    for (Constraint * constraint : m_constraints) {
+        layout->removeConstraint(constraint);
+        delete constraint;
+    }
+    
+    // if this is a root view of the layout manager
+    if (m_layout && m_layout->getRootLayer() == this) {
+        m_layout->setRootLayout(nullptr);
+    }
+    
+    // remove this from the parent
+    if (m_parent) {
+        m_parent->removeLayer(this);
+    }
+    
     // remove all child layers
     for (Layer * layer : m_layers) {
-        layer->m_parent = nullptr;
         delete layer;
     }
 }
+
+
+// get layer surface. Surface is owned by the layer
+Surface * Layer::getSurface()
+{
+    if (m_surface == nullptr) {
+        m_surface = new Surface(m_renderer, m_frame.size);
+    }
+    return m_surface;
+}
+
 
 
 #pragma mark - Layer Layout
@@ -57,7 +93,9 @@ void Layer::setFrame(const Rect & rect)
 {
     m_needRender = rect.size != m_frame.size;
     if (m_needRender) {
-        m_surface->setSize(rect.size);
+        if (m_surface) {
+            m_surface->setSize(rect.size);
+        }
     }
     
     m_frame = rect;
@@ -66,24 +104,10 @@ void Layer::setFrame(const Rect & rect)
 
 
 // add constraint
-void Layer::addConstraint(const Constraint & constraint)
+void Layer::addConstraint(Constraint * constraint)
 {
     m_constraints.push_back(constraint);
-}
-
-
-// update constraints
-void Layer::updateConstraints()
-{
-    // process constraints
-    for (Constraint & constraint : m_constraints) {
-
-    }
-    
-    // update child layers
-    for (Layer * layer : m_layers) {
-        layer->updateConstraints();
-    }
+    getLayoutManager()->addConstraint(constraint);
 }
 
 
