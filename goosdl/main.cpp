@@ -65,13 +65,13 @@ int main(int argc, char *argv[])
     auto pos_x = new Constraint{
         box,
         Constraint::Left,
-        SCREEN_WIDTH / 2
+        (SCREEN_WIDTH - width->getConstant()) / 2
     };
     box->addConstraint(pos_x);
     auto pos_y = new Constraint{
         box,
         Constraint::Top,
-        SCREEN_HEIGHT / 2
+        (SCREEN_HEIGHT - height->getConstant()) / 2
     };
     box->addConstraint(pos_y);
     

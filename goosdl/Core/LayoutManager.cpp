@@ -37,6 +37,8 @@ namespace  {
         rhea::variable y2  = 0;
         rhea::variable c_x = 0;
         rhea::variable c_y = 0;
+        rhea::variable w_2 = 0;
+        rhea::variable h_2 = 0;
         
         // default constructor
         LayoutVariables() = default;
@@ -54,8 +56,8 @@ namespace  {
             << "  y1  = " << vars.y1.int_value()  << '\n'
             << "  x2  = " << vars.x2.int_value()  << '\n'
             << "  y2  = " << vars.y2.int_value()  << '\n'
-            << "  w   = " << vars.w.int_value()   << '\n'
-            << "  h   = " << vars.h.int_value()   << '\n'
+            << "  w   = " << vars.w.int_value()   << ", w / 2 = " << vars.w_2.int_value() << '\n'
+            << "  h   = " << vars.h.int_value()   << ", h / 2 = " << vars.h_2.int_value() << '\n'
             << "  c_x = " << vars.c_x.int_value() << '\n'
             << "  c_y = " << vars.c_y.int_value() << '\n'
             << "}\n";
@@ -74,6 +76,9 @@ namespace  {
     
     // store in a simple map. Associate layer vairables with a layer
     std::map<Layer*, LayoutVariables> _layerVarsMap;
+    
+    // usable null variable
+    rhea::variable null_variable(0);
     
     // get vairable for attribute
     rhea::variable getVariable(LayoutVariables & vars, Constraint::Attribute attrib)
@@ -100,32 +105,28 @@ namespace  {
         }
     }
     
-    // usable null variable
-    rhea::variable null_variable(0);
-    
-    // find appropriate offset variable
-    rhea::variable getOffsetVariable(Constraint::Attribute attrib,
-                                     Layer * srcView,
-                                     Layer * dstView)
+    // get vairable for attribute based on relation between views
+    rhea::variable getVariable(LayoutVariables & vars,
+                               Constraint::Attribute attrib,
+                               Layer * srcView,
+                               Layer * dstView)
     {
-        if (dstView->getParent() != srcView) {
-            return null_variable;
-        }
-        
-        auto & srcVars = _layerVarsMap[srcView];
+        if (dstView->getParent() != srcView) return getVariable(vars, attrib);
         
         switch (attrib) {
             case Constraint::Attribute::Top:
-            case Constraint::Attribute::Bottom:
-            case Constraint::Attribute::CenterY:
-                return srcVars.y1;
             case Constraint::Attribute::Left:
-            case Constraint::Attribute::Right:
-            case Constraint::Attribute::CenterX:
-                return srcVars.x1;
-            case Constraint::Attribute::Width:
-            case Constraint::Attribute::Height:
                 return null_variable;
+            case Constraint::Attribute::Bottom:
+            case Constraint::Attribute::Height:
+                return vars.h;
+            case Constraint::Attribute::Right:
+            case Constraint::Attribute::Width:
+                return vars.w;
+            case Constraint::Attribute::CenterX:
+                return vars.w_2;
+            case Constraint::Attribute::CenterY:
+                return vars.h_2;
             default:
                 throw "Invalid";
         }
@@ -178,16 +179,20 @@ void LayoutManager::addConstraint(Constraint * constraint)
         rhea::constraint center_x ( dstVars.c_x == dstVars.x1 + dstVars.w / 2 ),
                          center_y ( dstVars.c_y == dstVars.y1 + dstVars.h / 2 ),
                          pos_x2   ( dstVars.x2  == dstVars.x1 + dstVars.w     ),
-                         pos_y2   ( dstVars.y2  == dstVars.y1 + dstVars.h     );
+                         pos_y2   ( dstVars.y2  == dstVars.y1 + dstVars.h     ),
+                         half_w   ( dstVars.w_2 == dstVars.w / 2              ),
+                         half_h   ( dstVars.h_2 == dstVars.h / 2              );
         
         // add to the solver
         m_solver.add_constraint(center_x);
         m_solver.add_constraint(center_y);
         m_solver.add_constraint(pos_x2);
         m_solver.add_constraint(pos_y2);
+        m_solver.add_constraint(half_w);
+        m_solver.add_constraint(half_h);
     }
     
-    //
+    // if is equal then "stay" this vaitable
     m_solver.add_stay(constraint->m_variable);
     
     // width
@@ -208,9 +213,8 @@ void LayoutManager::addConstraint(Constraint * constraint)
         m_solver.add_constraint(c);
     } else {
         rhea::variable dstV   = getVariable(_layerVarsMap[dstView], dstAttrib);
-        rhea::variable srcV   = getVariable(_layerVarsMap[srcView], srcAttrib);
-        rhea::variable offset = getOffsetVariable(srcAttrib, srcView, dstView);
-        rhea::constraint c(dstV == srcV + constraint->m_variable - offset);
+        rhea::variable srcV   = getVariable(_layerVarsMap[srcView], srcAttrib, srcView, dstView);
+        rhea::constraint c(dstV == srcV + constraint->m_variable);
         m_solver.add_constraint(c);
     }
 }
